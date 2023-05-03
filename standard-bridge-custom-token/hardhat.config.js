@@ -17,15 +17,13 @@ module.exports = {
         mnemonic: 'test test test test test test test test test test test junk'
       }
     },
-    'optimistic-goerli': {
-      chainId: 420,
-      url: 'https://goerli.optimism.io',
-      accounts: [process.env.PRIVATE_KEY]
+    "goerli": {
+      url: `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
+      accounts: [`${process.env.PRIVATE_KEY}`]
     },
-    'optimistic-mainnet': {
-      chainId: 10,
-      url: 'https://mainnet.optimism.io',
-      accounts: [process.env.PRIVATE_KEY]
+    "tokamak-optimism-goerli" : {
+      url: `https://goerli.optimism.tokamak.network`,
+      accounts: [`${process.env.PRIVATE_KEY}`]
     },
   },
   solidity: '0.8.9',

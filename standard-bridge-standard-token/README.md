@@ -1,23 +1,51 @@
 # Bridging your Standard ERC20 token to Optimism using the Standard Bridge
 
-[![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
+We will show you an example of how to distribute and use L1 standard token and L2 standard tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/tokamak-optimism-test) here(You can run the actual test code here on Github).
 
-This is a practical guide to getting your ERC20 token deployed on Optimism and bridging it using the
-[Standard Bridge implementation](https://community.optimism.io/docs/developers/bridge/standard-bridge.html).
+## Deploying a standard token on L1
 
-For an L1/L2 token pair to work on the Standard Bridge the L2 token contract has to implement
-[`IL2StandardERC20`](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts/contracts/standards/IL2StandardERC20.sol). 
+If you have a token in Layer 1, you can proceed from the next step. If not, you need to distribute the tokens on Layer 1 first.
+
+Execute `scripts/l1Token-deploy.js` to deploy the token to Layer 1.
+
+If the environment is goerli, you can deploy to goerli with the following command.
+
+```
+npx hardhat run scripts/l1Token-deploy.js --network goerli
+```
+
+When distribution is complete, the address of the distributed token is known and entered as `L1_TOKEN_ADDRESS` in the .env environment.
 
 
-## Deploying a standard token
+## Deploying a standard token on L2
 
-If there is no need for custom logic on Optimism, it's easiest to use the standard token, available as the
-[`L2StandardERC20`](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts/contracts/standards/L2StandardERC20.sol) contract as part of the `@eth-optimism/contracts` package. 
-The [standard token factory](https://github.com/ethereum-optimism/optimism/blob/develop/packages/contracts/contracts/L2/messaging/L2StandardTokenFactory.sol) can deploy the standard contract for you.
+Let's proceed with distributing standard Token to L2 by opening a terminal.
 
-You can use the deployment script under [`scripts/deploy-standard-token.js`](scripts/deploy-standard-token.js) to call this token factory. 
-The Hardhat config [`hardhat.config.js`](hardhat.config.js) is already setup for both Optimism (the production network) and Optimism Goerli (the testnet).
+```
+yarn hardhat console --network tokamak-optimism-goerli
+```
+
+Entering the above command will open a terminal for that network.
+Tokens can be distributed to L2 with the following command.
+
+```
+l2StandardERC20Factory = await ethers.getContractFactory("L2StandardERC20")
+l2StandardERC20 = await l2StandardERC20Factory.deploy(
+   "0x4200000000000000000000000000000000000010",
+   process.env.L1_CUSTOM_ADDRESS,
+   process.env.L2_TOKEN_NAME,
+   process.env.L2_TOKEN_SYMBOL)
+```
+
+Distribution to L2 has been completed with the above command, and we will check the address of the L2 token.
+
+```
+l2StandardERC20.address
+```
+
+you can use to instantiate `L2StandardERC20` either on a local dev node or on `tokamak-optimism-goerli`.
+
+Once you're ready with a tested goerli deployment, you can request a review [as explained in the standard token tutorial](../standard-bridge-standard-token/README.md#adding-a-token-to-the-bridge) form and we'll consider whitelisting your deployer address on `tokamak-optimism-goerli`.
 
 ### Configuration
 
@@ -37,10 +65,9 @@ The Hardhat config [`hardhat.config.js`](hardhat.config.js) is already setup for
 
 1. Edit `.env` to set the deployment parameters:
 
-   - `MNEMONIC`, the mnemonic for an account that has enough ETH for the deployment.
-   - `L2_ALCHEMY_KEY`, the key for the alchemy application for the endpoint.
+   - `PRIVATE_KEY`, this account is going to be used to call the factory and create your L2 ERC20. Remember to fund your account for deployment.
+   - `ALCHEMY_API_KEY`, the key for the alchemy application for the endpoint.
    - `L1_TOKEN_ADDRESS`, the address of the L1 ERC20 which you want to bridge.
-     The default value, [`0x32B3b2281717dA83463414af4E8CfB1970E56287`](https://goerli.etherscan.io/address/0x32B3b2281717dA83463414af4E8CfB1970E56287) is a test ERC-20 contract on Goerli that lets you call `faucet` to give yourself test tokens.
    - `L2_TOKEN_NAME` and `L2_TOKEN_SYMBOL` are the parameters for the L2 token contract. 
      In almost all cases, these would be the same as the L1 token name and symbol.
 
@@ -49,7 +76,7 @@ The Hardhat config [`hardhat.config.js`](hardhat.config.js) is already setup for
 1. Run the script:
 
    ```sh
-   yarn hardhat run scripts/deploy-standard-token.js --network optimism-goerli
+   yarn hardhat run scripts/deploy-standard-token.js --network tokamak-optimism-goerli
    ```
 
 The script uses our token factory contract `OVM_L2StandardTokenFactory` available as a predeploy at `0x4200000000000000000000000000000000000012` to deploy a standard token on L2. 
