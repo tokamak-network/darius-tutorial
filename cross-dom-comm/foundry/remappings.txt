@@ -1,2 +1,0 @@
-@eth-optimism/=lib/node_modules/@eth-optimism/
-

@@ -1,10 +1,7 @@
 # Bridging ERC-20 tokens with the Optimism SDK
 
-[![Discord](https://img.shields.io/discord/667044843901681675.svg?color=768AD4&label=discord&logo=https%3A%2F%2Fdiscordapp.com%2Fassets%2F8c9701b98ad4372b58f13fd9f65f966e.svg)](https://discord-gateway.optimism.io)
-[![Twitter Follow](https://img.shields.io/twitter/follow/optimismFND.svg?label=optimismFND&style=social)](https://twitter.com/optimismFND)
-
-This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/) to transfer ERC-20 tokens between Layer 1 (Ethereum) and Layer 2 (Optimism).
-While you *could* use [the bridge contracts](https://community.optimism.io/docs/developers/bridge/standard-bridge/) directly, a [simple usage error](https://community.optimism.io/docs/developers/bridge/standard-bridge/#depositing-erc20s) can cause you to lock tokens in the bridge forever and lose their value. 
+This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/) to transfer ERC-20 tokens between Layer 1 (Ethereum) and Layer 2 (Tokamak).
+While you *could* use the bridge contracts directly, a simple usage error can cause you to lock tokens in the bridge forever and lose their value. 
 The SDK provides transparent safety rails to prevent that mistake.
 
 
@@ -18,37 +15,32 @@ The SDK provides transparent safety rails to prevent that mistake.
 1. Clone this repository and enter it.
 
    ```sh
-   git clone https://github.com/ethereum-optimism/optimism-tutorial.git
-   cd optimism-tutorial/cross-dom-bridge-erc20
+   git clone https://github.com/tokamak-network/tokamak-optimism-test.git
    ```
 
 1. Install the necessary packages.
 
    ```sh
-   yarn
+   npm install
    ```
 
-1. Go to [Alchemy](https://www.alchemy.com/) and create two applications:
+1. Go to [Alchemy](https://www.alchemy.com/) and create one application:
 
    - An application on Goerli
-   - An application on Optimistic Goerli
 
-   Keep a copy of the two keys.
+   Keep a copy of the one key.
 
 1. Copy `.env.example` to `.env` and edit it:
 
    1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Optimism Goerli test network.
-   1. Set `GOERLI_ALCHEMY_KEY` to the key for the Goerli app.
-   1. Set `OPTIMISM_GOERLI_ALCHEMY_KEY` to the key for the Optimistic Goerli app
+   1. Set `ALCHEMY_API_KEY` to the key for the Goerli app.
 
-   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). [This faucet gives ETH on the Optimism Goerli network](https://optimismfaucet.xyz/).
+   [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). 
 
+## Run the sample code WithdrawTest
 
-## Run the sample code
-
-The sample code is in `index.js`, execute it.
+The sample code is in `DepositTest.js` and `WithdrawTest.js`, execute it.
 After you execute it, wait. It is not unusual for each operation to take minutes on Goerli.
-On the production network the withdrawals take around a week each, because of the [challenge period](https://community.optimism.io/docs/developers/bridge/messaging/#understanding-the-challenge-period).
 
 ### Expected output
 
@@ -56,36 +48,24 @@ When running on Goerli, the output from the script should be similar to:
 
 ```
 Deposit ERC20
-OUTb on L1:     OUTb on L2:401
-You don't have enough OUTb on L1. Let's call the faucet to fix that
-Faucet tx: 0xff61c59bb14600b9cef74d6788bf8778d601326b67ec108b8bee5e02de62b939
-	More info: https://goerli.etherscan.io/tx/0xff61c59bb14600b9cef74d6788bf8778d601326b67ec108b8bee5e02de62b939
-New L1 OUTb balance: 1000
-Allowance given by tx 0x7c541937bcdb76550aecc4558dd3c53955ea2fa61e38006fa3be246277c5d2c9
-	More info: https://goerli.etherscan.io/tx/0x7c541937bcdb76550aecc4558dd3c53955ea2fa61e38006fa3be246277c5d2c9
-Time so far 24.749 seconds
+before deposit
+TON on L1:     TON on L2:401
 Deposit transaction hash (on L1): 0xa083b921a583e3eb0a149e79a638cc43aec42af6a80812b5a3883f8ce799a177
 	More info: https://goerli.etherscan.io/tx/0xa083b921a583e3eb0a149e79a638cc43aec42af6a80812b5a3883f8ce799a177
 Waiting for status to change to RELAYED
 Time so far 49.39 seconds
-OUTb on L1:999     OUTb on L2:402
+after deposit
+TON on L1:999     TON on L2:402
 depositERC20 took 230.453 seconds
 
 
 Withdraw ERC20
-OUTb on L1:999     OUTb on L2:402
+before withdraw
+TON on L1:999     TON on L2:402
 Transaction hash (on L2): 0x1629ab4113b3aa68447a0a08d066c5c24be1214c624b4c622578dd6e20ea05ae
-	For more information: https://goerli-optimism.etherscan.io/tx/0x1629ab4113b3aa68447a0a08d066c5c24be1214c624b4c622578dd6e20ea05ae
-Waiting for status to change to IN_CHALLENGE_PERIOD
-Time so far 6.062 seconds
-In the challenge period, waiting for status READY_FOR_RELAY
-Time so far 210.964 seconds
-Ready for relay, finalizing message now
-Time so far 239.674 seconds
-Waiting for status to change to RELAYED
-Time so far 244.62 seconds
-OUTb on L1:1000     OUTb on L2:401
-withdrawERC20 took 254.932 seconds
+	For more information: https://goerli.explorer.tokamak.network/tx/0x1629ab4113b3aa68447a0a08d066c5c24be1214c624b4c622578dd6e20ea05ae
+after withdraw
+TON on L1:1000     TON on L2:401
 ```
 
 As you can see, the total running time is about eight minutes.
