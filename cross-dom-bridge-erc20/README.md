@@ -1,6 +1,6 @@
-# Bridging ERC-20 tokens with the Optimism SDK
+# Bridging ERC-20 tokens
 
-This tutorial teaches you how to use the [Optimism SDK](https://sdk.optimism.io/) to transfer ERC-20 tokens between Layer 1 (Ethereum) and Layer 2 (Tokamak).
+This tutorial teaches you how to use the SDK to transfer ERC-20 tokens between Layer 1 (Ethereum) and Layer 2 (Tokamak).
 While you *could* use the bridge contracts directly, a simple usage error can cause you to lock tokens in the bridge forever and lose their value. 
 The SDK provides transparent safety rails to prevent that mistake.
 
@@ -16,6 +16,7 @@ The SDK provides transparent safety rails to prevent that mistake.
 
    ```sh
    git clone https://github.com/tokamak-network/tokamak-optimism-test.git
+   cd tokamak-optimism-test
    ```
 
 1. Install the necessary packages.
