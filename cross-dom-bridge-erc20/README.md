@@ -48,6 +48,9 @@ When running on Goerli, the output from the script should be similar to:
 
 ```
 Deposit ERC20
+Allowance given by tx 0x7c541937bcdb76550aecc4558dd3c53955ea2fa61e38006fa3be246277c5d2c9
+	More info: https://goerli.etherscan.io/tx/0x7c541937bcdb76550aecc4558dd3c53955ea2fa61e38006fa3be246277c5d2c9
+Time so far 24.749 seconds
 before deposit
 TON on L1:     TON on L2:401
 Deposit transaction hash (on L1): 0xa083b921a583e3eb0a149e79a638cc43aec42af6a80812b5a3883f8ce799a177
@@ -90,19 +93,18 @@ The libraries we need: [`ethers`](https://docs.ethers.io/v5/), [`dotenv`](https:
 
 ```js
 const mnemonic = process.env.MNEMONIC
-const l1Url = `https://eth-goerli.g.alchemy.com/v2/${process.env.GOERLI_KEY}`
-const l2Url = `https://opt-goerli.g.alchemy.com/v2/${process.env.OPTIMISM_GOERLI_KEY}`
+const l1Url = `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`
+const l2Url = `https://goerli.optimism.tokamak.network`
 ```
 
 Configuration, read from `.env`.
 
 
 ```js
-// Contract addresses for OPTb tokens, taken
-// from https://github.com/ethereum-optimism/ethereum-optimism.github.io/blob/master/data/OUTb/data.json
+// Contract addresses for TON tokens, taken
 const erc20Addrs = {
-  l1Addr: "0x32B3b2281717dA83463414af4E8CfB1970E56287",
-  l2Addr: "0x3e7eF8f50246f725885102E8238CBba33F276747"
+  l1Addr: "0x68c1F9620aeC7F2913430aD6daC1bb16D8444F00",
+  l2Addr: "0x7c6b91D9Be155A6Db01f749217d76fF02A7227F2"
 }    // erc20Addrs
 ```
 
@@ -163,9 +165,19 @@ const erc20ABI = [
     outputs: [{ name: "balance", type: "uint256" }],
     type: "function",
   },
+  // approve
+    {
+      constant: true,
+      inputs: [
+        { name: "spender", type: "address" },
+        { name: "amount", type: "uint256" }],
+      name: "approve",
+      outputs: [{ name: "", type: "bool" }],
+      type: "function",
+    },
 ```
 
-This is `balanceOf` from the ERC-20 standard, used to get the balance of an address. 
+This is `balanceOf` and `approve` from the ERC-20 standard, used to get the balance of an address and used to approve. 
 
 ```js
   // faucet
@@ -183,12 +195,12 @@ This is `faucet`, a function supported by the L1 contract, which gives the calle
 Technically speaking we should have two ABIs, because the L2 contract does not have `faucet`, but that would be a needless complication in this case when we can just avoid trying to call it.
 
 
-### `setup`
+### `setupCrossMessengerAndContract`
 
 This function sets up the parameters we need for transfers.
 
 ```js
-const setup = async() => {
+const setupCrossMessengerAndContract = async() => {
   const [l1Signer, l2Signer] = await getSigners()
   ourAddr= l1Signer.address
 ```
@@ -208,64 +220,29 @@ Create the [`CrossChainMessenger`](https://sdk.optimism.io/classes/crosschainmes
 
 
 ```js
-  l1ERC20 = new ethers.Contract(erc20Addrs.l1Addr, erc20ABI, l1Signer)
-  l2ERC20 = new ethers.Contract(erc20Addrs.l2Addr, erc20ABI, l2Signer)
+  l1Contract = new ethers.Contract(erc20Addrs.l1Addr, erc20ABI, l1Signer)
+  l2Contract = new ethers.Contract(erc20Addrs.l2Addr, erc20ABI, l2Signer)
 }    // setup
 ```
 
-The ERC20 contracts, one per layer.
-
-
-```
-
-### `reportERC20Balances`
-
-This function reports the ERC-20 balances of the address on both layers.
-
-```js
-const reportERC20Balances = async () => {
-  const l1Balance = (await l1ERC20.balanceOf(addr)).toString().slice(0,-18)
-  const l2Balance = (await l2ERC20.balanceOf(addr)).toString().slice(0,-18)
-  console.log(`OUTb on L1:${l1Balance}     OUTb on L2:${l2Balance}`)
-```
-
-Get the balances.
-
-```js
-  if (l1Balance != 0)
-    return
-```
-
-If the L1 balance isn't zero, return - there is nothing we need to do.
-Otherwise, call `l1ERC20.faucet()` to get the user `OUTb` tokens to deposit and withdraw through the bridge.
-
-```js
-  console.log(`You don't have enough OUTb on L1. Let's call the faucet to fix that`)
-  const tx = (await l1ERC20.faucet())
-  console.log(`Faucet tx: ${tx.hash}`)
-  console.log(`\tMore info: https://goerli.etherscan.io/tx/${tx.hash}`)
-  await tx.wait()
-  const newBalance = (await l1ERC20.balanceOf(addr)).toString().slice(0,-18)
-  console.log(`New L1 OUTb balance: ${newBalance}`)
-}    // reportERC20Balances
-```
-
-
 ### `depositERC20`
 
-This function shows how to deposit an ERC-20 token from Ethereum to Optimism.
+This function shows how to deposit an ERC-20 token from Ethereum to TokamakLayer2.
 
 ```js
-const oneToken = 1000000000000000000n
+const depositAmount = ethers.utils.parseEther("1")
 ```
 
-`OUTb` tokens are divided into $10^18$ basic units, same as ETH divided into wei. 
+`TON` tokens are divided into $1^18$ basic units, same as ETH divided into wei. 
 
 ```js
 const depositERC20 = async () => {
 
   console.log("Deposit ERC20")
-  await reportERC20Balances()
+  tx = (await l1Contract.balanceOf(l1Signer.address)).toString().slice(0,-18)
+  tx2 = (await l2Contract.balanceOf(l2Signer.address)).toString().slice(0,-18)
+  console.log('before deposit');
+  console.log(`TON on L1:${tx}     TON on L2:${tx2}`)
 ```
 
 To show that the deposit actually happened we show before and after balances.
@@ -274,7 +251,7 @@ To show that the deposit actually happened we show before and after balances.
   const start = new Date()
 
   // Need the l2 address to know which bridge is responsible
-  const allowanceResponse = await crossChainMessenger.approveERC20(
+  depositTx1 = await crossChainMessenger.approveERC20(
     erc20Addrs.l1Addr, erc20Addrs.l2Addr, oneToken)
 ```
 
@@ -284,25 +261,25 @@ While most ERC-20 tokens go through the standard bridge, a few require custom bu
 In those cases there is a custom bridge contract that needs to get the allowance. 
 
 ```js
-  await allowanceResponse.wait()
-  console.log(`Allowance given by tx ${allowanceResponse.hash}`)
-  console.log(`\tMore info: https://goerli.etherscan.io/tx/${allowanceResponse.hash}`)
+  await depositTx1.wait()
+  console.log(`Allowance given by tx ${depositTx1.hash}`)
+  console.log(`\tMore info: https://goerli.etherscan.io/tx/${depositTx1.hash}`)
   console.log(`Time so far ${(new Date()-start)/1000} seconds`)
 ```
 
 Wait until the allowance transaction is processed and then report the time it took and the hash.
 
 ```js
-  const response = await crossChainMessenger.depositERC20(
+  depositTx2 = await crossChainMessenger.depositERC20(
     erc20Addrs.l1Addr, erc20Addrs.l2Addr, oneToken)
 ```
 
 [`crossChainMessenger.depositERC20()`](https://sdk.optimism.io/classes/crosschainmessenger#depositERC20-2) creates and sends the deposit trasaction on L1.
 
 ```js
-  console.log(`Deposit transaction hash (on L1): ${response.hash}`)
-  console.log(`\tMore info: https://goerli.etherscan.io/tx/${response.hash}`)
-  await response.wait()
+  console.log(`Deposit transaction hash (on L1): ${depositTx2.hash}`)
+  console.log(`\tMore info: https://goerli.etherscan.io/tx/${depositTx2.hash}`)
+  await depositTx2.wait()
 ```
 
 Of course, it takes time for the transaction to actually be processed on L1.
@@ -324,78 +301,66 @@ The third parameter (which is optional) is a hashed array of options:
 - `timeoutMs`: Maximum time to wait
 
 ```js
-  await reportERC20Balances()
+  console.log('after deposit');
+  console.log(`TON on L1:${tx3}     TON on L2:${tx4}`)
   console.log(`depositERC20 took ${(new Date()-start)/1000} seconds\n\n`)
 }     // depositERC20()
 ```
 
-Once the message is relayed the balance change on Optimism is practically instantaneous.
+Once the message is relayed the balance change on TokamakLayer2 is practically instantaneous.
 We can just report the balances and see that the L2 balance rose by 1 gwei.
 
-### `withdrawETH`
+### `withdrawERC20`
 
-This function shows how to withdraw ERC-20 from Optimism to Ethereum.
+This function shows how to withdraw ERC-20 from TokamakLayer2 to Ethereum.
 
 ```js
 const withdrawERC20 = async () => {
+  const [l1Signer, l2Signer] = await getSigners()
+  console.log("Withdraw ERC20");
+  tx = (await l1Contract.balanceOf(l1Signer.address)).toString().slice(0,-18)
+  tx2 = (await l2Contract.balanceOf(l2Signer.address)).toString().slice(0,-18)
+  console.log('before withdraw');
+  console.log(`TON on L1:${tx}     TON on L2:${tx2}`)
 
-  console.log("Withdraw ERC20")
-  const start = new Date()
-  await reportERC20Balances()
+  withdrawalTx1 = await crossChainMessenger.withdrawERC20(l1Contract.address, erc20Addrs.l2Addr, withdrawAmount)
+  console.log(`\ttransaction hash (on L2): ${withdrawalTx1.hash}`)
+  console.log(`\tFor more information: https://goerli.explorer.tokamak.network/tx/${withdrawalTx1.hash}`)
+  await withdrawalTx1.wait()
 
-  const response = await crossChainMessenger.withdrawERC20(
-    erc20Addrs.l1Addr, erc20Addrs.l2Addr, oneToken)
-  console.log(`Transaction hash (on L2): ${response.hash}`)
-  console.log(`\tFor more information: https://goerli-optimism.etherscan.io/tx/${response.hash}`)
-  await response.wait()
-
-  console.log("Waiting for status to change to IN_CHALLENGE_PERIOD")
+  tx3 = (await l1Contract.balanceOf(l1Signer.address)).toString().slice(0,-18)
+  tx4 = (await l2Contract.balanceOf(l2Signer.address)).toString().slice(0,-18)
+  console.log('after withdraw');
+  console.log(`TON on L1:${tx3}     TON on L2:${tx4}`)
 ```
 
-There are two wait periods for a withdrawal:
-
-1. Until the status root is written to L1. 
-1. The challenge period.
-
-You can read more about this [here](https://community.optimism.io/docs/developers/bridge/messaging/#for-optimism-l2-to-ethereum-l1-transactions).
-
-```js
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)
-  await crossChainMessenger.waitForMessageStatus(response.hash, 
-    optimismSDK.MessageStatus.IN_CHALLENGE_PERIOD)
-  console.log("In the challenge period, waiting for status READY_FOR_RELAY") 
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
-  await crossChainMessenger.waitForMessageStatus(response.hash, 
-                                                optimismSDK.MessageStatus.READY_FOR_RELAY) 
-```
-
-Wait until the state that includes the transaction gets past the challenge period, at which time we can finalize (also known as claim) the transaction.
-
-```js
-
-  console.log("Ready for relay, finalizing message now")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
-  await crossChainMessenger.finalizeMessage(response)
-
-  console.log("Waiting for status to change to RELAYED")
-  console.log(`Time so far ${(new Date()-start)/1000} seconds`)  
-  await crossChainMessenger.waitForMessageStatus(response, 
-    optimismSDK.MessageStatus.RELAYED)
-  await reportERC20Balances()   
-  console.log(`withdrawERC20 took ${(new Date()-start)/1000} seconds\n\n\n`)  
-}     // withdrawERC20()
-```
-
-Finalizing the message also takes a bit of time.
+To show that the withdraw actually happened we show before and after balances.
 
 ### `main`
 
-A `main` to run the setup followed by both operations.
+A `main` to run the setup followed.
+
+`DepositTest`
 
 ```js
 const main = async () => {
-    await setup()
+    await setupCrossMessengerAndContract()
     await depositERC20()
+}  // main
+
+
+main().then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error)
+    process.exit(1)
+  })
+```
+
+`WithdrawTest`
+
+```js
+const main = async () => {
+    await setupCrossMessengerAndContract()
     await withdrawERC20()
 }  // main
 
@@ -410,9 +375,6 @@ main().then(() => process.exit(0))
 ## Conclusion
 
 You should now be able to write applications that use our SDK and bridge to transfer ERC-20 assets between layer 1 and layer 2. 
-
-Note that for withdrawals of a commonly used ERC-20 token (or ETH) you would probably want to use a [third party bridge](https://www.optimism.io/apps/bridges) for higher speed and lower cost.
-Here is the API documentation for some of those bridges:
 
 * [Hop](https://docs.hop.exchange/js-sdk/getting-started)
 * [Synapse](https://docs.synapseprotocol.com/bridge-sdk/sdk-reference/bridge-synapsebridge)
