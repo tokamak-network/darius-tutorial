@@ -12,8 +12,7 @@ Darius L2 Testnet endpoint is https://goerli.optimism.tokamak.network. Goerli Te
 
 ### Network choice
 
-For development purposes we recommend you use either a local development node or [Darius L2 Testnet(https://goerli.explorer.tokamak.network/).
-
+For development purposes we recommend you use either a local development node or [Darius L2 Testnet](https://goerli.explorer.tokamak.network/).
 The tests examples below use Darius L2 Testnet.
 
 
