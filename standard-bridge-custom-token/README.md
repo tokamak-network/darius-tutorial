@@ -1,4 +1,4 @@
-# Bridging your Custom ERC20 token to Optimism using the Standard Bridge
+# Bridging your Custom ERC20 token to Darius using the Standard Bridge
 
 We will show you an example of how to distribute and use L2 custom tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/tokamak-optimism-test) here(You can run the actual test code here on Github).
 
@@ -37,7 +37,7 @@ yarn hardhat console --network tokamak-optimism-goerli
 ```
 
 Entering the above command will open a terminal for that network.
-Tokens can be distributed to L2 with the following command.
+Tokens can be distributed to Darius L2 with the following command.
 
 ```
 l2CustomERC20Factory = await ethers.getContractFactory("L2CustomERC20")
@@ -54,8 +54,6 @@ l2CustomERC20.address
 
 you can use to instantiate `L2CustomERC20` either on a local dev node or on `tokamak-optimism-goerli`.
 
-Once you're ready with a tested goerli deployment, you can request a review [as explained in the standard token tutorial](../standard-bridge-standard-token/README.md#adding-a-token-to-the-bridge) form and we'll consider whitelisting your deployer address on `tokamak-optimism-goerli`.
-
 
 ### Configuration
 
@@ -68,7 +66,7 @@ See an example config at [.env.example](.env.example); copy into a `.env` file b
 
 ### Concluding
 
-If the configuration is properly set and token distribution to layer 1 and token distribution to layer 2 are executed in order, the token distribution is completed successfully.
+If the configuration is properly set and token distribution to Goerli and token distribution to Darius are executed in order, the token distribution is completed successfully.
 
 ## Testing 
 
