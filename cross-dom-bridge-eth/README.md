@@ -1,6 +1,6 @@
-# Bridging ETH with the Optimism SDK
+# Bridging ETH with the Optimism SDK (limited functionality)
 
-This tutorial teaches you how to use the SDK to transfer ETH between Layer 1 (Goerli) and Layer 2 (Darius).
+This tutorial teaches you how to use the Optimism SDK to transfer ETH between Layer 1 (Goerli) and Layer 2 (Darius). Please note that Optimism SDK cannot be fully used on Darius at the moment. We will support native SDK for our network in the future. 
 
 
 ## Setup
