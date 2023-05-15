@@ -1,7 +1,7 @@
-# Communication between contracts on TokamakLayer2 and Ethereum
+# Communication between contracts on Darius and Goerli
 
 This tutorial teaches you how to do interlayer communication.
-You will learn how run a contract on Ethereum that runs another contract on Optimism, and also how to run a contract on Optimism that calls a contract on Ethereum.
+You will learn how run a contract on Ethereum that runs another contract on Optimism, and also how to run a contract on Darius that calls a contract on Goerli.
 
 ## Test Code git
 
@@ -9,7 +9,7 @@ You will learn how run a contract on Ethereum that runs another contract on Opti
 
 ## Seeing it in action
 
-To show how this works we installed [a slightly modified version of HardHat's `Greeter.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on both L1 Goerli and Tokamak Goerli.
+To show how this works we installed [a slightly modified version of HardHat's `Greeter.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on both L1 Goerli and L2 Darius.
 
 
 | Network | Greeter address  |
@@ -22,7 +22,7 @@ If somebody else uses these contracts while you are going through the tutorial, 
 In that case you'll see the wrong greeting when you call the `Greeter` contract.
 However, you can still verify your controller works in one of these ways:
 
-- Find the transaction on either [Goerli Etherscan](https://goerli.etherscan.io/address/0x7fA4D972bB15B71358da2D937E4A830A9084cf2e#internaltx) or [Tokamak Goerli BlockScount](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/internal-transactions#address-tabs).
+- Find the transaction on either [Goerli Etherscan](https://goerli.etherscan.io/address/0x7fA4D972bB15B71358da2D937E4A830A9084cf2e#internaltx) or [Darius Block Explorer](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/internal-transactions#address-tabs).
   In either case, it will be an internal transaction because the contract called directly is the cross domain messenger.
 - Just try again.
 :::
@@ -43,7 +43,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
 
 1. Copy `.env.example` to `.env` and edit it:
 
-   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Tokamak Goerli test network.
+   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Darius test network.
    1. Set `ALCHEMY_API_KEY` to the key for the Goerli app.
    
 1. Install the necessary packages.
@@ -52,9 +52,9 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
    yarn
    ```
 
-#### Ethereum message to Tokamak L2
+#### Goerli message to Darius
 
-1. Connect the Hardhat console to Tokamak Goerli (L2):
+1. Connect the Hardhat console to Darius(L2):
 
    ```sh
    yarn hardhat console --network tokamak-optimism-goerli
@@ -102,7 +102,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
    await greeter.greet()
    ```
 
-#### Tokamak L2 message to Ethereum
+#### Darius message to Goerli
 
 1. Get the current L1 greeting. There are two ways to do that:
 
@@ -116,7 +116,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
      await greeter.greet()     
      ```
 
-1. Connect the Hardhat console to Tokamak Goerli (L2):
+1. Connect the Hardhat console to Darius (L2):
 
    ```sh
    yarn hardhat console --network tokamak-optimism-goerli
@@ -275,5 +275,5 @@ If it is the cross domain messenger, call `xDomainMessageSender()` to get the or
 
 ## Conclusion
 
-You should now be able to control contracts on Tokamak from Ethereum or the other way around.
+You should now be able to control contracts on Darius from Goerli or the other way around.
 
