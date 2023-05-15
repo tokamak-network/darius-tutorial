@@ -1,10 +1,11 @@
 # Bridging your Custom ERC20 token to Darius using the Standard Bridge
 
-We will show you an example of how to distribute and use L2 custom tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/tokamak-optimism-test) here(You can run the actual test code here on Github).
+We will show you an example of how to distribute and use L2 custom tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/darius-test
+) here(You can run the actual test code here on Github).
 
 ## Customizing the `L2StandardERC20` implementation
 
-Our example here implements a custom token [`L2CustomERC20`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/standards/L2StandardERC20.sol) based on the `L2StandardERC20` but with `8` decimal points, rather than `18`.
+Our example here implements a custom token [`L2CustomERC20`](https://github.com/tokamak-network/darius-test/blob/main/contracts/standards/L2StandardERC20.sol) based on the `L2StandardERC20` but with `8` decimal points, rather than `18`.
 
 The basic role of Token is to import it to do the same as `L2StandardERC20`. This standard token implementation is based on the OpenZeppelin ERC20 contract and implements the required `IL2StandardERC20` interface.
 

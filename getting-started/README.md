@@ -18,7 +18,7 @@ The tests examples below use Darius L2 Testnet.
 
 ## Interacting with Darius contracts
 
-We have [Hardhat's Greeter contract](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on Darius L2 Testnet, at address [0x106941459A8768f5A92b770e280555FAF817576f](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/contracts#address-tabs). 
+We have [Hardhat's Greeter contract](https://github.com/tokamak-network/darius-test/blob/main/contracts/Greeter.sol) on Darius L2 Testnet, at address [0x106941459A8768f5A92b770e280555FAF817576f](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/contracts#address-tabs). 
 You can verify your development stack configuration by interacting with it. 
 
 As you can see in the different development stacks below, the way you deploy contracts and interact with them on Darius L2 Testnet is almost identical to the way you do it with L1 Ethereum.
@@ -26,7 +26,7 @@ The most visible difference is that you have to specify a different endpoint (of
 
 ## Hardhat
 
-In [Hardhat](https://hardhat.org/) you use a configuration similar to [this one](https://github.com/tokamak-network/tokamak-optimism-test).
+In [Hardhat](https://hardhat.org/) you use a configuration similar to [this one](https://github.com/tokamak-network/darius-test).
 
 ### Connecting to Darius
 

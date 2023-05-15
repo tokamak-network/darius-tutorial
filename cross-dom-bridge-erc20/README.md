@@ -15,8 +15,8 @@ The SDK provides transparent safety rails to prevent that mistake.
 1. Clone this repository and enter it.
 
    ```sh
-   git clone https://github.com/tokamak-network/tokamak-optimism-test.git
-   cd tokamak-optimism-test
+   git clone https://github.com/tokamak-network/darius-test.git
+   cd darius-test
    ```
 
 1. Install the necessary packages.

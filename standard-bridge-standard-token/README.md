@@ -1,6 +1,6 @@
 # Bridging your Standard ERC20 token to Darius using the Standard Bridge
 
-We will show you an example of how to distribute and use L1 standard token and L2 standard tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/tokamak-optimism-test) here(You can run the actual test code here on Github).
+We will show you an example of how to distribute and use L1 standard token and L2 standard tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/darius-test) here(You can run the actual test code here on Github).
 
 ## Deploying a standard token on Goerli
 
@@ -78,8 +78,6 @@ you can use to instantiate `L2StandardERC20` either on a local dev node or on `t
    ```
 
 The script uses our token factory contract `OVM_L2StandardTokenFactory` available as a predeploy at `0x4200000000000000000000000000000000000012` to deploy a standard token on L2. 
-At the end you should get a successful output with the text for a `data.json` file you'll be able to use to [add the token to the bridge](https://github.com/ethereum-optimism/ethereum-optimism.github.io).
-Note that if you have the token both on the test network and the production network you should not use that `data.json` by itself, but combine it the information in the two files. 
 
 ## Deploying a Custom Token
 

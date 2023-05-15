@@ -5,11 +5,11 @@ You will learn how run a contract on Ethereum that runs another contract on Opti
 
 ## Test Code git
 
-[Github](https://github.com/tokamak-network/tokamak-optimism-test/tree/main/contracts)
+[Github](https://github.com/tokamak-network/darius-test/tree/main/contracts)
 
 ## Seeing it in action
 
-To show how this works we installed [a slightly modified version of HardHat's `Greeter.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on both L1 Goerli and L2 Darius.
+To show how this works we installed [a slightly modified version of HardHat's `Greeter.sol`](https://github.com/tokamak-network/darius-test/blob/main/contracts/Greeter.sol) on both L1 Goerli and L2 Darius.
 
 
 | Network | Greeter address  |
@@ -152,8 +152,8 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
 
 ## How it's done (in Solidity)
 
-We'll go over the L1 contract that controls Greeter on L2, [`FromL1_ControlL2Greeter.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/FromL1_ControlL2Greeter.sol).
-Except for addresses, the contract going the other direction, [`FromL2_ControlL1Greeter.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/FromL2_ControlL1Greeter.sol), is identical.
+We'll go over the L1 contract that controls Greeter on L2, [`FromL1_ControlL2Greeter.sol`](https://github.com/tokamak-network/darius-test/blob/main/contracts/FromL1_ControlL2Greeter.sol).
+Except for addresses, the contract going the other direction, [`FromL2_ControlL1Greeter.sol`](https://github.com/tokamak-network/darius-test/blob/main/contracts/FromL2_ControlL1Greeter.sol), is identical.
 
 ```solidity
 //SPDX-License-Identifier: Unlicense
@@ -164,7 +164,7 @@ import { ICrossDomainMessenger } from
     "@eth-optimism/contracts/libraries/bridge/ICrossDomainMessenger.sol";
 ```
 
-This line imports the interface to send messages, [`ICrossDomainMessenger.sol`](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/libraries/bridge/ICrossDomainMessenger.sol).
+This line imports the interface to send messages, [`ICrossDomainMessenger.sol`](https://github.com/tokamak-network/darius-test/blob/main/contracts/libraries/bridge/ICrossDomainMessenger.sol).
 
 
 ```solidity
