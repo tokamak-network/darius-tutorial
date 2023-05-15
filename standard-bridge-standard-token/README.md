@@ -1,8 +1,8 @@
-# Bridging your Standard ERC20 token to Optimism using the Standard Bridge
+# Bridging your Standard ERC20 token to Darius using the Standard Bridge
 
 We will show you an example of how to distribute and use L1 standard token and L2 standard tokens. The current github explains, and the github with actual contracts is [`contract-tutorial`](https://github.com/tokamak-network/tokamak-optimism-test) here(You can run the actual test code here on Github).
 
-## Deploying a standard token on L1
+## Deploying a standard token on Goerli
 
 If you have a token in Layer 1, you can proceed from the next step. If not, you need to distribute the tokens on Layer 1 first.
 
@@ -17,7 +17,7 @@ npx hardhat run scripts/l1Token-deploy.js --network goerli
 When distribution is complete, the address of the distributed token is known and entered as `L1_TOKEN_ADDRESS` in the .env environment.
 
 
-## Deploying a standard token on L2
+## Deploying a standard token on Darius
 
 Let's proceed with distributing standard Token to L2 by opening a terminal.
 
