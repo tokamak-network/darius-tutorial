@@ -15,7 +15,7 @@ To show how this works we installed [a slightly modified version of HardHat's `G
 | Network | Greeter address  |
 | ------- | ---------------- |
 | Goerli (L1) | [0x51aB33d511a74aBeFDce2d4AddB92991B73F8937](https://goerli.etherscan.io/address/0x51aB33d511a74aBeFDce2d4AddB92991B73F8937) |
-| Tokamak Goerli (L2) | [0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F) |
+| Darius (L2) | [0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F) |
 
 ::: Tip What if somebody else uses the same contracts at the same time?
 If somebody else uses these contracts while you are going through the tutorial, they might update the greeting after you.
@@ -179,7 +179,7 @@ To call L1 from L2, on either mainnet or Goerli, use the address of `L2CrossDoma
     address greeterL2Addr = 0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F;
 ```    
 
-This is the address on which `Greeter` is installed on Optimistic Goerli.
+This is the address on which `Greeter` is installed on Darius.
 
 
 ```solidity
@@ -253,7 +253,7 @@ Unless we are going to run this code thousands of times, it is more efficient to
 ```
 
 There are three possibilities for the cross domain messenger's address on L1, because the address is not under our control.
-On L2 Tokamak has full control of the genesis block, so we can put all of our contracts on convenient addresses.
+On L2 Darius has full control of the genesis block, so we can put all of our contracts on convenient addresses.
 
 ```solidity
     // If this isn't a cross domain message
