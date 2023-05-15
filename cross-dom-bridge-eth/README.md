@@ -175,7 +175,7 @@ const reportBalances = async () => {
 
 ### `depositETH`
 
-This function shows how to deposit ETH from Ethereum to TokamakLayer2.
+This function shows how to deposit ETH from Goerli to Darius.
 
 ```js
 const depositETH = async () => {
@@ -276,9 +276,3 @@ main().then(() => process.exit(0))
 
 You should now be able to write applications that use our SDK and bridge to transfer ETH between layer 1 and layer 2. 
 
-Here is the API documentation for some of those bridges:
-
-* [Hop](https://docs.hop.exchange/js-sdk/getting-started)
-* [Synapse](https://docs.synapseprotocol.com/bridge-sdk/sdk-reference/bridge-synapsebridge)
-* [Across](https://docs.across.to/bridge/developers/across-sdk)
-* [Celer Bridge](https://cbridge-docs.celer.network/developer/cbridge-sdk)
