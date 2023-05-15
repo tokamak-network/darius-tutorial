@@ -1,38 +1,37 @@
-# Getting started developing for Tokamak Layer2
+# Getting started developing for Darius L2 Testnet
 
-This tutorial teaches you the basics of Tokamak Layer2 development.
-TokamakLayer2 is EVM equivalent, meaning we run a slightly modified version of the same `geth` you run on mainnet.
-Therefore, we the differences between Tokamak Layer2 development and Ethereum development are minor.
+This tutorial teaches you the basics of Darius L2 Testnet development.
+Darius L2 Testnet is EVM equivalent, meaning we run a slightly modified version of the same `geth` you run on mainnet.
+Therefore, we the differences between Darius L2 Testnet development and Ethereum development are minor.
 But a few differences do exist
 
-## Tokamak-Goerli endpoint URL
+## Darius L2 Testnet endpoint URL
 
 To access any Ethereum type network you need an endpoint. 
-Tokamak-Goerli endpoint is https://goerli.optimism.tokamak.network
-
+Darius L2 Testnet endpoint is https://goerli.optimism.tokamak.network. Goerli Testnet is used as L1 for Darius L2 Testnet.
 
 ### Network choice
 
-For development purposes we recommend you use either a local development node or [Tokamak Goerli](https://goerli.explorer.tokamak.network/).
+For development purposes we recommend you use either a local development node or [Darius L2 Testnet(https://goerli.explorer.tokamak.network/).
 
-The tests examples below use Tokamak Goerli.
+The tests examples below use Darius L2 Testnet.
 
 
-## Interacting with Optimism contracts
+## Interacting with Darius contracts
 
-We have [Hardhat's Greeter contract](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on Tokamak Goerli, at address [0x106941459A8768f5A92b770e280555FAF817576f](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/contracts#address-tabs). 
+We have [Hardhat's Greeter contract](https://github.com/tokamak-network/tokamak-optimism-test/blob/main/contracts/Greeter.sol) on Darius L2 Testnet, at address [0x106941459A8768f5A92b770e280555FAF817576f](https://goerli.explorer.tokamak.network/address/0xDe6b80f4700C2148Ba2aF81640a23E153C007C7F/contracts#address-tabs). 
 You can verify your development stack configuration by interacting with it. 
 
-As you can see in the different development stacks below, the way you deploy contracts and interact with them on TokamakGoerli is almost identical to the way you do it with L1 Ethereum.
+As you can see in the different development stacks below, the way you deploy contracts and interact with them on Darius L2 Testnet is almost identical to the way you do it with L1 Ethereum.
 The most visible difference is that you have to specify a different endpoint (of course). 
 
 ## Hardhat
 
 In [Hardhat](https://hardhat.org/) you use a configuration similar to [this one](https://github.com/tokamak-network/tokamak-optimism-test).
 
-### Connecting to Optimism
+### Connecting to Darius
 
-Follow these steps to add Tokamak Goerli support to an existing Hardhat project. 
+Follow these steps to add Darius L2 Testnet support to an existing Hardhat project. 
 
 
 1. Define your network configuration in `.env`:
@@ -144,6 +143,6 @@ It is best to start development with the EVM provided by the development stack.
 Not only is it faster, but such EVMs often have extra features, such as the [ability to log messages from Solidity](https://hardhat.org/tutorial/debugging-with-hardhat-network.html) or a [graphical user interface](https://trufflesuite.com/ganache/).
 
 After you are done with that development, debug your decentralized application using either a development node or the Goerli test network. 
-This lets you debug parts that that are Optimism specific such as calls to bridges to transfer assets between layers.
+This lets you debug parts that that are Darius specific such as calls to bridges to transfer assets between layers.
 
 Only when you have a version that works well on a test network should you deploy to the production network, where every transaction has a cost.
