@@ -1,6 +1,6 @@
 # Bridging ERC-20 tokens
 
-This tutorial teaches you how to use the SDK to transfer ERC-20 tokens between Layer 1 (Ethereum) and Layer 2 (Tokamak).
+This tutorial teaches you how to use the Optimism SDK (we will provide our own SDK later) to transfer ERC-20 tokens between Layer 1 (Goerli) and Layer 2 (Darius).
 While you *could* use the bridge contracts directly, a simple usage error can cause you to lock tokens in the bridge forever and lose their value. 
 The SDK provides transparent safety rails to prevent that mistake.
 
@@ -33,7 +33,7 @@ The SDK provides transparent safety rails to prevent that mistake.
 
 1. Copy `.env.example` to `.env` and edit it:
 
-   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Optimism Goerli test network.
+   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Darius L2 test network.
    1. Set `ALCHEMY_API_KEY` to the key for the Goerli app.
 
    [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/). 
@@ -228,7 +228,7 @@ Create the [`CrossChainMessenger`](https://sdk.optimism.io/classes/crosschainmes
 
 ### `depositERC20`
 
-This function shows how to deposit an ERC-20 token from Ethereum to TokamakLayer2.
+This function shows how to deposit an ERC-20 token from Goerli to Darius.
 
 ```js
 const depositAmount = ethers.utils.parseEther("1")
@@ -313,7 +313,7 @@ We can just report the balances and see that the L2 balance rose by 1 gwei.
 
 ### `withdrawERC20`
 
-This function shows how to withdraw ERC-20 from TokamakLayer2 to Ethereum.
+This function shows how to withdraw ERC-20 from Darius to Goerli.
 
 ```js
 const withdrawERC20 = async () => {
