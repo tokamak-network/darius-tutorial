@@ -83,15 +83,6 @@ The script uses our token factory contract `OVM_L2StandardTokenFactory` availabl
 At the end you should get a successful output with the text for a `data.json` file you'll be able to use to [add the token to the bridge](https://github.com/ethereum-optimism/ethereum-optimism.github.io).
 Note that if you have the token both on the test network and the production network you should not use that `data.json` by itself, but combine it the information in the two files. 
 
-
-### Adding a token to the bridge
-
-You can find the directions to add a token to the bridge [here](https://github.com/ethereum-optimism/ethereum-optimism.github.io).
-If you want an empty logo for testing purposes, you can use [this file from Wikipedia](https://commons.wikimedia.org/wiki/File:Sq_blank.svg).
-
-The PR you submit should be similar to [this one](https://github.com/ethereum-optimism/ethereum-optimism.github.io/pull/149).
-
-
 ## Deploying a Custom Token
 
 When the `L2StandardERC20` implementation does not satisfy your requirements, we can consider allowing a custom implemetation. 
