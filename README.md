@@ -9,7 +9,7 @@ Please note that Optimism SDK is not fully supported on Darius L2 testnet at the
 
 ## Cross Domain
 
-* [Communication between contracts on Optimism and Ethereum](https://github.com/tokamak-network/darius-tutorial/tree/main/cross-dom-comm)
+* [Communication between contracts on Darius and Goerli](https://github.com/tokamak-network/darius-tutorial/tree/main/cross-dom-comm)
 * [Bridging ETH](https://github.com/tokamak-network/darius-tutorial/tree/main/cross-dom-bridge-eth)
 * [Bridging ERC-20 tokens](https://github.com/tokamak-network/darius-tutorial/tree/main/cross-dom-bridge-erc20)
 * [Creating an ERC20 Token on L2 to represent one on L1](https://github.com/tokamak-network/darius-tutorial/tree/main/standard-bridge-standard-token)
