@@ -45,8 +45,6 @@ l2StandardERC20.address
 
 you can use to instantiate `L2StandardERC20` either on a local dev node or on `tokamak-optimism-goerli`.
 
-Once you're ready with a tested goerli deployment, you can request a review [as explained in the standard token tutorial](../standard-bridge-standard-token/README.md#adding-a-token-to-the-bridge) form and we'll consider whitelisting your deployer address on `tokamak-optimism-goerli`.
-
 ### Configuration
 
 1. Install the necessary packages.
