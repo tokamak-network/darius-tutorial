@@ -1,5 +1,5 @@
 # Darius L2 Testnet (Goerli Ethereum) Tutorials
-This is the tutorial for Darius L2 testnet. Please note that Optimism SDK is not fully supported on Darius L2 testnet at the moment, we will release a fully working version in the future. 
+This is the tutorial for Darius L2 testnet using Goerli Testnet as L1. Please note that Optimism SDK is not fully supported on Darius L2 testnet at the moment, we will release a fully working version in the future. 
 
 ## Getting Started
 
