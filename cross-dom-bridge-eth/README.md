@@ -1,6 +1,6 @@
 # Bridging ETH with the Optimism SDK
 
-This tutorial teaches you how to use the SDK to transfer ETH between Layer 1 (Ethereum) and Layer 2 (Tokamak).
+This tutorial teaches you how to use the SDK to transfer ETH between Layer 1 (Goerli) and Layer 2 (Darius).
 
 
 ## Setup
@@ -31,7 +31,7 @@ This tutorial teaches you how to use the SDK to transfer ETH between Layer 1 (Et
 
 1. Copy `.env.example` to `.env` and edit it:
 
-   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Optimism Goerli test network.
+   1. Set `MNEMONIC` to point to an account that has ETH on the Goerli test network and the Darius test network.
    1. Set `ALCHEMY_API_KEY` to the key for the Goerli app.
 
    [This faucet gives ETH on the Goerli network](https://faucet.paradigm.xyz/).
@@ -222,12 +222,12 @@ The third parameter (which is optional) is a hashed array of options:
 }     // depositETH()
 ```
 
-Once the message is relayed the balance change on TokamakLayer2 is practically instantaneous.
+Once the message is relayed the balance change on Darius is practically instantaneous.
 We can just report the balances and see that the L2 balance rose by 1 gwei.
 
 ### `withdrawETH`
 
-This function shows how to withdraw ETH from TokamakLayer2 to Ethereum.
+This function shows how to withdraw ETH from Darius to Ethereum.
 
 ```js
 const withdrawETH = async () => { 
