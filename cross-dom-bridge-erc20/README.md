@@ -308,7 +308,7 @@ The third parameter (which is optional) is a hashed array of options:
 }     // depositERC20()
 ```
 
-Once the message is relayed the balance change on TokamakLayer2 is practically instantaneous.
+Once the message is relayed the balance change on Darius is practically instantaneous.
 We can just report the balances and see that the L2 balance rose by 1 gwei.
 
 ### `withdrawERC20`
