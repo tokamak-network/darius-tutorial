@@ -34,7 +34,7 @@ When distribution is complete, the address of the distributed token is known and
 Let's proceed with distributing Custom Token to L2 by opening a terminal.
 
 ```
-yarn hardhat console --network tokamak-optimism-goerli
+yarn hardhat console --network tokamak-darius-goerli
 ```
 
 Entering the above command will open a terminal for that network.

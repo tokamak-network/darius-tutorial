@@ -22,7 +22,7 @@ When distribution is complete, the address of the distributed token is known and
 Let's proceed with distributing standard Token to L2 by opening a terminal.
 
 ```
-yarn hardhat console --network tokamak-optimism-goerli
+yarn hardhat console --network tokamak-darius-goerli
 ```
 
 Entering the above command will open a terminal for that network.
@@ -74,7 +74,7 @@ you can use to instantiate `L2StandardERC20` either on a local dev node or on `t
 1. Run the script:
 
    ```sh
-   yarn hardhat run scripts/deploy-standard-token.js --network tokamak-optimism-goerli
+   yarn hardhat run scripts/deploy-standard-token.js --network tokamak-darius-goerli
    ```
 
 The script uses our token factory contract `OVM_L2StandardTokenFactory` available as a predeploy at `0x4200000000000000000000000000000000000012` to deploy a standard token on L2. 

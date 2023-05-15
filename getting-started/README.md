@@ -80,7 +80,7 @@ Follow these steps to add Darius L2 Testnet support to an existing Hardhat proje
    If you want to test with your personal account, set it as follows in `module.exports.networks`: 
 
    ```js
-   "tokamak-optimism-goerli" : {
+   "tokamak-darius-goerli" : {
       url: optimismGoerliUrl,
       accounts: [`${process.env.PRIVATE_KEY}`]
    }
@@ -101,7 +101,7 @@ Follow these steps to add Darius L2 Testnet support to an existing Hardhat proje
    Replace the final command with
 
    ```sh
-   yarn hardhat console --network tokamak-optimism-goerli
+   yarn hardhat console --network tokamak-darius-goerli
    ```
 
 1. Connect to the Greeter contract:   
