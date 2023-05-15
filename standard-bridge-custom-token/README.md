@@ -53,7 +53,7 @@ Distribution to L2 has been completed with the above command, and we will check 
 l2CustomERC20.address
 ```
 
-you can use to instantiate `L2CustomERC20` either on a local dev node or on `tokamak-optimism-goerli`.
+you can use to instantiate `L2CustomERC20` either on a local dev node or on `tokamak-darius-goerli`.
 
 
 ### Configuration

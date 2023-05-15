@@ -212,8 +212,8 @@ Get the signers we need, and our address.
 
 ```js
   crossChainMessenger = new optimismSDK.CrossChainMessenger({
-      l1ChainId: l1ChainId,    // Goerli value, 1 for mainnet
-      l2ChainId: l2ChainId,  // Goerli value, 10 for mainnet
+      l1ChainId: l1ChainId,    // Goerli value
+      l2ChainId: l2ChainId,    // Goerli value
       l1SignerOrProvider: l1Signer,
       l2SignerOrProvider: l2Signer
   })

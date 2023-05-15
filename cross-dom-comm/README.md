@@ -57,7 +57,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
 1. Connect the Hardhat console to Darius(L2):
 
    ```sh
-   yarn hardhat console --network tokamak-optimism-goerli
+   yarn hardhat console --network tokamak-darius-goerli
    ```
 
 1. Connect to the greeter on L2:
@@ -93,7 +93,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
    Note that it may take a few minutes to update after the transaction is processed on L1.
 
    ```sh
-   yarn hardhat console --network tokamak-optimism-goerli
+   yarn hardhat console --network tokamak-darius-goerli
    ```
 
    ```js
@@ -119,7 +119,7 @@ This setup assumes you already have [Node.js](https://nodejs.org/en/) and [yarn]
 1. Connect the Hardhat console to Darius (L2):
 
    ```sh
-   yarn hardhat console --network tokamak-optimism-goerli
+   yarn hardhat console --network tokamak-darius-goerli
    ```
 
 1. Deploy and call the `FromL2_ControlL1Greeter` contract.
@@ -246,8 +246,8 @@ Unless we are going to run this code thousands of times, it is more efficient to
     if (block.chainid == 5)
       cdmAddr = 0x2878373BA3Be0Ef2a93Ba5b3F7210D76cb222e63;
 
-    // L2 (same address on every network)
-    if (block.chainid == 10 || block.chainid == 420)
+    // L2 Darius
+    if (block.chainid == 5050)
       cdmAddr = 0x4200000000000000000000000000000000000007;
       
 ```

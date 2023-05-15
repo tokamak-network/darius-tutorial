@@ -71,7 +71,7 @@ Follow these steps to add Darius L2 Testnet support to an existing Hardhat proje
    1. Add a network definition in `module.exports.networks`:
 
    ```js
-   "tokamak-goerli": {
+   "tokamak-darius-goerli": {
       url: optimismGoerliUrl,
       accounts: { mnemonic: process.env.MNEMONIC }
    }   
@@ -93,14 +93,6 @@ Follow these steps to add Darius L2 Testnet support to an existing Hardhat proje
    ```sh
    cd hardhat
    yarn
-   yarn hardhat console --network tokamak-goerli
-   ```
-
-   **personal account:**
-
-   Replace the final command with
-
-   ```sh
    yarn hardhat console --network tokamak-darius-goerli
    ```
 
