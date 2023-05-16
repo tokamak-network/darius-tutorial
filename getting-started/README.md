@@ -2,8 +2,7 @@
 
 This tutorial teaches you the basics of Darius L2 Testnet development.
 Darius L2 Testnet is EVM equivalent, meaning we run a slightly modified version of the same `geth` you run on mainnet.
-Therefore, we the differences between Darius L2 Testnet development and Ethereum development are minor.
-But a few differences do exist
+Therefore, the differences between Darius L2 Testnet development and Ethereum development are minor, but a few differences do exist.
 
 ## Darius L2 Testnet endpoint URL
 
