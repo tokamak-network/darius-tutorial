@@ -3,6 +3,8 @@ This is the tutorial for Darius L2 testnet using Goerli Testnet as L1. Darius is
 
 Please note that Optimism SDK is not fully supported on Darius L2 testnet at the moment, we will release a fully working SDK in the future. 
 
+You can check out our [notion page](https://onther.notion.site/Darius-L2-Testnet-Dev-Document-5023767f30754d21876b049da68f0128) to read more about Darius testnet. 
+
 ## Getting Started
 
 * [Getting started developing for Darius L2 Testnet](https://github.com/tokamak-network/darius-tutorial/tree/main/getting-started)
