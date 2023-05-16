@@ -1,4 +1,4 @@
-# Darius L2 Testnet (Goerli Ethereum) Tutorials
+# Darius L2 Testnet Tutorials
 This is the tutorial for Darius L2 testnet using Goerli Testnet as L1. Darius is a custom fork of pre-bedrock version of Optimism. 
 
 Please note that Optimism SDK is not fully supported on Darius L2 testnet at the moment, we will release a fully working SDK in the future. 
