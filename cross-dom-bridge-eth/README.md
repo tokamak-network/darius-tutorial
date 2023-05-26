@@ -71,7 +71,7 @@ As you can see, the total running time is about twenty minutes.
 
 ```js
 const ethers = require("ethers")
-const optimismSDK = require("@eth-optimism/sdk")
+const optimismSDK = require("@tokamak-network/tokamak-layer2-sdk")
 require('dotenv').config()
 ```
 
